@@ -1,17 +1,23 @@
-# Nginx Exporter for Prometheus
+# Credits
 
-This is a simple server that periodically scrapes nginx stats and exports them via HTTP for Prometheus
+All credits go to https://github.com/discordianfish/nginx_exporter and all [contributors]https://github.com/discordianfish/nginx_exporter/graphs/contributors of the orignal projet.
+
+This is just an adaptation to php fpm
+
+# PHP Fpm Exporter for Prometheus
+
+This is a simple server that periodically scrapes fpm stats and exports them via HTTP for Prometheus
 consumption.
 
 To run it:
 
 ```bash
-./nginx_exporter [flags]
+./fpm_exporter [flags]
 ```
 
 Help on flags:
 ```bash
-./nginx_exporter --help
+./fpm_exporter --help
 ```
 
 ## Getting Started
@@ -20,8 +26,8 @@ Help on flags:
 ## Using Docker
 
 ```
-docker pull fish/nginx-exporter
+docker pull lchenay/php-fpm_exporter
 
-docker run -d -p 9113:9113 fish/nginx-exporter \
-    -nginx.scrape_uri=http://172.17.42.1/nginx_status
+docker run -d -p 9113:9113 lchenay/php-fpm_exporter \
+    -fpm.scrape_uri=http://172.17.42.1/fpm_status
 ```

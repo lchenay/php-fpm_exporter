@@ -12,6 +12,6 @@
 # limitations under the License.
 
 VERSION  := 0.0.1
-TARGET   := nginx_exporter
+TARGET   := fpm_exporter
 
 include Makefile.COMMON

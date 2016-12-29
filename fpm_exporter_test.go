@@ -9,17 +9,27 @@ import (
 )
 
 const (
-	nginxStatus = `Active connections: 91 
-server accepts handled requests
- 145249 145249 151557 
-Reading: 0 Writing: 24 Waiting: 66 
+	fpmStatus = `pool:                 api
+process manager:      static
+start time:           28/Dec/2016:18:06:46 +0100
+start since:          65086
+accepted conn:        1049662
+listen queue:         0
+max listen queue:     0
+listen queue len:     0
+idle processes:       25
+active processes:     5
+total processes:      30
+max active processes: 30
+max children reached: 0
+slow requests:        0
 `
-	metricCount = 7
+	metricCount = 10
 )
 
-func TestNginxStatus(t *testing.T) {
+func TestFpmStatus(t *testing.T) {
 	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte(nginxStatus))
+		w.Write([]byte(fpmStatus))
 	})
 	server := httptest.NewServer(handler)
 
@@ -36,6 +46,7 @@ func TestNginxStatus(t *testing.T) {
 		if m == nil {
 			t.Error("expected metric but got nil")
 		}
+
 	}
 	if <-ch != nil {
 		t.Error("expected closed channel")
